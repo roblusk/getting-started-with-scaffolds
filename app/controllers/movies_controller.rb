@@ -1,4 +1,10 @@
 class MoviesController < ApplicationController
+  def new
+    render template: "movies/new"
+  end
+  
+  
+  
   def index
     matching_movies = Movie.all
 
@@ -29,6 +35,11 @@ class MoviesController < ApplicationController
     else
       redirect_to("/movies", { :alert => the_movie.errors.full_messages.to_sentence })
     end
+  end
+
+  def edit
+    @the_movie = Movie.where(id: params.fetch(:id))[0]
+    render template: "movies/edit"
   end
 
   def update
